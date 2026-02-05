@@ -1,142 +1,218 @@
-/* --- 1. RESET & VARIABLE --- */
+/* --- 1. VARIABEL & RESET --- */
 :root {
-  /* Variabel warna agar mudah diganti di satu tempat */
-  --primary-green: #2d6a4f;    /* Hijau gelap yang elegan */
+  /* Kita simpan warna dalam variabel agar mudah diganti nantinya */
+  --primary-green: #2d6a4f;    /* Hijau tua untuk elemen utama */
+  --medium-green: #52b788;     /* Hijau medium untuk hover/aksen */
   --light-green: #d8f3dc;      /* Hijau sangat muda untuk background */
-  --accent-green: #52b788;     /* Hijau cerah untuk hover/tombol */
+  --dark-text: #1b4332;        /* Warna teks hijau gelap (lebih lembut dari hitam) */
   --white: #ffffff;
-  --dark-text: #1b4332;        /* Teks hijau gelap agar tidak kaku hitam */
-  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Bayangan lembut untuk kartu */
+  --bg-light: #f8f9fa;         /* Abu-abu sangat tipis untuk selingan section */
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Bayangan lembut untuk efek kartu */
 }
 
 * {
-  margin: 0;                   /* Menghapus margin bawaan browser */
-  padding: 0;                  /* Menghapus padding bawaan browser */
-  box-sizing: border-box;      /* Menghitung padding dalam total lebar elemen */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font modern */
+  margin: 0;                   /* Menghapus spasi bawaan browser di luar elemen */
+  padding: 0;                  /* Menghapus spasi bawaan browser di dalam elemen */
+  box-sizing: border-box;      /* Padding tidak akan menambah lebar elemen */
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Font modern */
+}
+
+html {
+  scroll-behavior: smooth;     /* Efek scroll halus saat klik menu navigasi */
 }
 
 body {
-  line-height: 1.6;            /* Memberi spasi antar baris teks agar enak dibaca */
-  color: var(--dark-text);     /* Warna teks utama */
+  line-height: 1.6;            /* Memberi jarak antar baris teks agar enak dibaca */
+  color: var(--dark-text);     /* Warna teks global */
   background-color: var(--white);
 }
 
-/* --- 2. NAVIGASI --- */
-nav {
-  display: flex;               /* Membuat konten nav menjadi sejajar horizontal */
-  justify-content: space-between; /* Logo di kiri, menu di kanan */
-  align-items: center;         /* Menyejajarkan konten secara vertikal di tengah */
-  padding: 20px 10%;           /* Spasi dalam: atas-bawah 20px, kiri-kanan 10% */
-  background: var(--white);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Garis bayangan halus di bawah nav */
-  position: sticky;            /* Membuat nav tetap menempel saat scroll */
-  top: 0;                      /* Posisi tempel di paling atas */
-  z-index: 1000;               /* Memastikan nav selalu di atas elemen lain */
+/* --- 2. LAYOUT UMUM --- */
+.container {
+  padding: 80px 10%;           /* Memberi ruang kosong di sisi kiri & kanan konten */
 }
 
-nav .logo {
-  font-size: 1.5rem;           /* Ukuran font logo */
-  font-weight: bold;           /* Menebalkan teks logo */
+.bg-light {
+  background-color: var(--bg-light); /* Warna background alternatif untuk pemisah section */
+}
+
+h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 40px;
   color: var(--primary-green);
 }
 
+/* --- 3. NAVIGASI --- */
+header {
+  background: var(--white);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Bayangan halus di bawah header */
+  position: sticky;            /* Header tetap muncul saat di-scroll */
+  top: 0;
+  z-index: 1000;               /* Memastikan navigasi selalu di lapisan paling atas */
+}
+
+nav {
+  display: flex;               /* Membuat logo dan menu berjejer ke samping */
+  justify-content: space-between; /* Logo di kiri, menu di kanan */
+  align-items: center;         /* Menyejajarkan item di tengah secara vertikal */
+  padding: 15px 10%;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-green);
+}
+
+.logo span {
+  color: var(--medium-green);  /* Memberi warna berbeda pada kata "Porto" */
+}
+
 nav ul {
-  display: flex;               /* Membuat list menu menjadi horizontal */
-  list-style: none;            /* Menghapus titik-titik peluru list */
+  display: flex;               /* Membuat list menu berjejer horizontal */
+  list-style: none;            /* Menghapus titik (bullet) pada list */
 }
 
 nav ul li {
-  margin-left: 30px;           /* Memberi jarak antar menu */
+  margin-left: 30px;           /* Jarak antar menu */
 }
 
 nav ul li a {
-  text-decoration: none;       /* Menghapus garis bawah link */
+  text-decoration: none;       /* Menghapus garis bawah pada link */
   color: var(--dark-text);
-  font-weight: 500;            /* Ketebalan font sedang */
+  font-weight: 500;
   transition: 0.3s;            /* Efek halus saat warna berubah */
 }
 
 nav ul li a:hover {
-  color: var(--accent-green);  /* Warna berubah saat kursor menyentuh link */
+  color: var(--medium-green);  /* Warna berubah saat kursor menyentuh menu */
 }
 
-/* --- 3. HERO SECTION --- */
+/* --- 4. HERO SECTION --- */
 .hero {
-  height: 80vh;                /* Tinggi hero 80% dari tinggi layar */
+  height: 90vh;                /* Tinggi hero 90% dari tinggi layar */
   display: flex;
-  flex-direction: column;      /* Menyusun konten ke bawah */
-  justify-content: center;     /* Tengah secara vertikal */
-  align-items: center;         /* Tengah secara horizontal */
-  text-align: center;          /* Teks rata tengah */
-  background-color: var(--light-green); 
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--light-green);
   padding: 0 10%;
 }
 
-.hero h1 {
-  font-size: 3.5rem;           /* Ukuran judul besar */
-  margin-bottom: 20px;         /* Jarak judul ke teks di bawahnya */
+.hero-content h1 {
+  font-size: 4rem;
+  color: var(--primary-green);
+  line-height: 1.1;
+  margin: 10px 0 20px;
 }
 
-.hero p {
+.hero-content p {
   font-size: 1.2rem;
-  max-width: 600px;            /* Membatasi lebar teks agar tidak terlalu panjang */
+  max-width: 500px;
   margin-bottom: 30px;
 }
 
-/* --- 4. ABOUT SECTION --- */
-.about {
-  padding: 80px 15%;           /* Spasi luas agar terlihat bersih */
-  text-align: center;
-}
-
-/* --- 5. PROYEK (GRID) --- */
-.proyek {
-  padding: 60px 10%;
-  background-color: #f9f9f9;   /* Warna background abu-abu sangat muda */
-}
-
-.proyek h2 {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.grid-container {
-  display: grid;               /* Mengaktifkan mode Grid */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsif otomatis */
-  gap: 30px;                   /* Jarak antar kartu proyek */
-}
-
-.card {
-  background: var(--white);
-  padding: 20px;
-  border-radius: 12px;         /* Sudut kartu yang melengkung halus */
-  box-shadow: var(--shadow);   /* Memberi efek timbul */
-  transition: transform 0.3s;  /* Efek halus saat kartu di-hover */
-}
-
-.card:hover {
-  transform: translateY(-10px); /* Kartu sedikit naik saat kursor di atasnya */
-}
-
-/* --- 6. MEDSOS & FOOTER --- */
-.medsos {
-  padding: 40px;
-  text-align: center;
-  background: var(--white);
-}
-
-.medsos a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: var(--primary-green);
-  font-weight: bold;
-}
-
-footer {
-  padding: 20px;
-  text-align: center;
-  background: var(--primary-green);
+.btn-hero {
+  display: inline-block;       /* Agar link bisa diberi padding seperti tombol */
+  padding: 12px 30px;
+  background-color: var(--primary-green);
   color: var(--white);
-  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 30px;         /* Membuat sudut tombol membulat */
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-hero:hover {
+  background-color: var(--medium-green);
+  transform: translateY(-3px); /* Tombol sedikit naik saat di-hover */
+}
+
+.hero-logo img {
+  width: 350px;                /* Ukuran foto profil/logo kamu */
+  border-radius: 50%;          /* Membuat foto berbentuk lingkaran */
+  border: 10px solid var(--white);
+  box-shadow: var(--shadow);
+}
+
+/* --- 5. ABOUT SECTION --- */
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;              /* Membuat konten berada di tengah */
+  text-align: center;
+}
+
+.about-content p {
+  margin-bottom: 20px;
+}
+
+/* --- 6. PROYEK (GRID SYSTEM) --- */
+.proyek-grid {
+  display: grid;               /* Mengaktifkan sistem grid */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsif otomatis */
+  gap: 25px;                   /* Jarak antar kartu proyek */
+}
+
+.proyek-card {
+  background: var(--white);
+  border-radius: 15px;
+  overflow: hidden;            /* Memastikan gambar tidak keluar dari radius sudut */
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow);
+  transition: 0.3s;
+}
+
+.proyek-card:hover {
+  transform: translateY(-10px); /* Efek kartu terangkat */
+}
+
+.proyek-card img {
+  width: 100%;                 /* Gambar menyesuaikan lebar kartu */
+  height: 200px;
+  object-fit: cover;           /* Gambar akan dipotong rapi tanpa gepeng */
+}
+
+.proyek-info {
+  padding: 20px;
+}
+
+.proyek-info h3 {
+  margin-bottom: 10px;
+  color: var(--primary-green);
+}
+
+/* --- 7. MEDSOS SECTION --- */
+.medsos-list {
+  display: flex;
+  justify-content: center;     /* Menaruh ikon medsos di tengah */
+  gap: 40px;
+  flex-wrap: wrap;             /* Agar ikon turun ke bawah jika layar sempit */
+}
+
+.medsos-item {
+  display: flex;
+  flex-direction: column;      /* Susun ikon di atas, teks di bawah */
+  align-items: center;
+  text-decoration: none;
+  color: var(--dark-text);
+  transition: 0.3s;
+}
+
+.medsos-item img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.medsos-item:hover {
+  color: var(--medium-green);
+  transform: scale(1.1);       /* Sedikit membesar saat di-hover */
+}
+
+/* --- 8. FOOTER --- */
+footer {
+  padding: 30px;
+  text-align: center;
+  background-color: var(--primary-green);
+  color: var(--white);
 }
